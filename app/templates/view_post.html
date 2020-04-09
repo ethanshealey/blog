@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<header class="masthead" id="bg" style="background-image: url({{ url_for('static', filename='/images/post-bg.jpg') }})">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="post-heading">
+            <h1>{{ post.title }}</h1>
+            <h2 class="subheading">{{ post.subtitle }}</h2>
+            <span class="meta">Posted by
+                <a href="{{ url_for('about') }}">Ethan Shealey</a>
+                on {{post.date}}
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Main Content -->
+  <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="post-preview">
+            {{ post.raw_body | safe }}
+          </div>
+        </div>
+      </div>
+    </div>
+{% endblock %}

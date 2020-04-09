@@ -1,0 +1,47 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<header class="masthead" style="background-image: url({{ url_for('static', filename='/images/bg.jpg') }})">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>Login</h1>
+            <span class="subheading"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+        <form action='' method='POST'>
+            {{form.hidden_tag()}}
+            <p>
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Username</label>
+                        {{ form.username(type="text", class="form-control", placeholder="Username") }}
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+            </p>
+            <p>
+                <div class="control-group">
+                    <div class="form-group floating-label-form-group controls">
+                        <label>Username</label>
+                        {{ form.password(type="password", class="form-control", placeholder="Password") }}
+                        <p class="help-block text-danger"></p>
+                    </div>
+                </div>
+                
+            </p>
+            {{ form.submit(class="btn btn-primary" ) }}
+        </form>
+      </div>
+    </div>
+  </div>
+{% endblock %}

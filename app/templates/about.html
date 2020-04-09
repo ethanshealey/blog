@@ -1,0 +1,46 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<!-- Page Header -->
+<header class="masthead" style="background-image: url({{ url_for('static', filename='/images/about.jpg') }})">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>About Me</h1>
+            <span class="subheading">Who am I?</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+<!-- Main Content -->
+<div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="post-preview">
+            <h1>Hello! I am Ethan Shealey!</h1>
+            <p>
+            Who am I? I am currently a sophomore attending High Point University studying Computer Science with a focus in Cyber Security, 
+            and with my current situation amid the COVID-19 outbreak, 
+            I thought learning how to create and host my own Flask Web App would be a great time killer!
+            </p>
+            <p>
+            Programming is something I'm extremetly passionate about, although I didn't start learning to program until my freshman year of college! 
+            Before then I taught myself the basics of Web Development, that being HTML and CSS, in High School. This is what sparked my interest in everything computers!
+            </p>
+            <p>
+            Since then I have learned C, C++, Javascript, ReactJS, Java, Python, Flask, Assembly, Cyber Security, and much more! I have also competed in Cyber FastTrack Competiton and placed in the top 0.93%!
+            <ul><li><a href="http://www.highpoint.edu/blog/2019/10/hpu-students-advanced-in-national-cybersecurity-competition/" target="_blank">http://www.highpoint.edu/blog/2019/10/hpu-students-advanced-in-national-cybersecurity-competition/</a></li></ul>
+            I also got to build a Python Flask web app with a couple friends for the Mayo Clinic!
+            <ul><br><li><a href="http://www.highpoint.edu/blog/2019/11/students-and-faculty-in-hpus-webb-school-of-engineering-assist-in-nsf-funded-research/">http://www.highpoint.edu/blog/2019/11/students-and-faculty-in-hpus-webb-school-of-engineering-assist-in-nsf-funded-research/</a></li><li><a href="http://stemaccessforall.org/" target="_blank">http://stemaccessforall.org/</a></li></ul>
+            </p>
+            <p>
+            Feel free to click on any of the social media links below, or go check out my GitHub!
+            </p>
+          </div>
+      </div>
+    </div>
+  </div>
+{% endblock %}

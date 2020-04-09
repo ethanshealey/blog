@@ -1,0 +1,74 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<header class="masthead" style="background-image: url({{ url_for('static', filename='/images/make-a-post.jpg') }})">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>Make a Post</h1>
+            <span class="subheading"></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+  
+  <!-- Main Content -->
+  <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="post-preview">
+            <form action='' method='POST'>
+                {{form.hidden_tag()}}
+                <p>
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls">
+                            <label>Title</label>
+                            {{ form.title(type="text", class="form-control", placeholder="Title") }}
+                            <p class="help-block text-danger"></p>
+                            </div>
+                    </div>
+                </p>
+                <p>
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls">
+                            <label>Subtitle</label>
+                            {{ form.subtitle(type="text", class="form-control", placeholder="Subtitle") }}
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                </p>
+                <p>
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls">
+                            <label>Body</label>
+                            {{ form.raw_body(type="text", class="form-control", placeholder="Body", id="post", onkeypress="update(this)") }}
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                </p>
+                <p>
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls">
+                            <i>Rendered HTML</i>
+                                <div id="rendered"></div>
+                            </div>
+                        </div>
+                    </p>
+                {{ form.submit(class="btn btn-primary" ) }}
+        </div>
+      </div>
+    </div>
+    <script src="https://rawgit.com/jackmoore/autosize/master/dist/autosize.min.js"></script>
+    <script>autosize(document.getElementById("post"));</script>
+    <script>autosize(document.getElementById("rendered"));</script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+    <script>
+    function update(e) {
+        var text = e.value;
+        $('#rendered').html(text)
+    }
+    </script>
+{% endblock %}
