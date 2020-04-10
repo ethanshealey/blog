@@ -1,0 +1,17 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<header class="masthead" style="background-image: url({{ url_for('static', filename='/images/make-a-post.jpg') }})">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>404</h1>
+            <p class="subheading">Uh Oh! Looks like the page you're looking for doesn't exist!</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+{% endblock %}

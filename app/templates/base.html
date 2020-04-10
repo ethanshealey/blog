@@ -8,8 +8,11 @@
   <meta name="description" content="">
   <meta name="author" content="">
 
-  <title>{{ title }} | ethanshealey.com</title>
+  <title>{% if title %}{{ title }} | {% endif %}ethanshealey.com</title>
 
+  <meta name="description" content="{% if desc %}{{ desc }}{% else %}Learn Programming By Following Various Tutorials Offered In Several Languages{% endif %}">
+
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8">
   <link rel="icon" href="/images/logo_GPf_icon.ico">
 
   <!-- Bootstrap core CSS -->

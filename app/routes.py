@@ -65,7 +65,7 @@ def create_post():
 @app.route('/posts/<id>/<title>')
 def view_post(id, title):
     post = Post.query.filter_by(post_id=id).first()
-    return render_template('view_post.html', post=post, title=post.title)
+    return render_template('view_post.html', post=post, title=post.title, desc=post.subtitle)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -87,3 +87,7 @@ def login():
 def logout():
     logout_user()
     return redirect(url_for('index'))
+
+@app.errorhandler(404)
+def page_not_found(e):
+    return render_template('404.html', title='404'), 404
