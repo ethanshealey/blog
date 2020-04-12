@@ -1,0 +1,56 @@
+{% extends 'base.html' %}
+
+{% block content %}
+<header class="masthead" style="background-image: url({{ url_for('static', filename='/images/search.jpg') }})">
+    <div class="overlay"></div>
+    <div class="container">
+      <div class="row">
+        <div class="col-lg-8 col-md-10 mx-auto">
+          <div class="site-heading">
+            <h1>Search</h1>
+            <span class="subheading">Search by keyterm or tags</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="container">
+        <div class="row">
+          <div class="col-lg-8 col-md-10 mx-auto">
+            <form action='' method='POST'>
+                {{form.hidden_tag()}}
+                <p>
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls">
+                            <label>Search</label>
+                                {{ form.item(type="text", class="form-control", placeholder="Search...") }}
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                </p>
+                {{ form.submit(class="btn btn-primary" ) }}
+            </form>
+            {% if results %}
+            <hr>
+            {% for post in results %}
+            <div class="post-preview">
+          
+                    <a href="{{url_for('view_post', id=post.post_id, title=post.title)}}">
+                      <h2 class="post-title">
+                        {{post.title}}
+                      </h2>
+                      <h3 class="post-subtitle">
+                          {{ post.subtitle }}
+                        </h3>
+                    </a>
+                    <p class="post-meta">Posted by
+                      <a href="{{ url_for('about') }}">Ethan Shealey</a>
+                      on {{post.date}}</p>
+                  </div>
+            {% endfor %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+{% endblock %} 

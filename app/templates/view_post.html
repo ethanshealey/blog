@@ -26,6 +26,13 @@
           <div class="post-preview">
             {{ post.raw_body | safe }}
           </div>
+          <div class="post-preview">
+            <hr>
+            <i><h3>Tags</h3></i>
+              {% for tag in tags %}
+                <a href="{{url_for('search_item', item=tag)}}" class="btn">#{{ tag }}</a>
+              {% endfor %}
+          </div>
         </div>
       </div>
     </div>

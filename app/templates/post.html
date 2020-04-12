@@ -54,10 +54,20 @@
                         <div class="form-group floating-label-form-group controls">
                             <i>Rendered HTML</i>
                                 <div id="rendered"></div>
-                            </div>
                         </div>
-                    </p>
+                    </div>
+                </p>
+                <p>
+                    <div class="control-group">
+                        <div class="form-group floating-label-form-group controls">
+                            <label>Tags</label>
+                            {{ form.tags(class="form-control", type="tags", placeholder="Tags", id="tags", style="width: 100%") }}
+                            <p class="help-block text-danger"></p>
+                        </div>
+                    </div>
+                </p>
                 {{ form.submit(class="btn btn-primary" ) }}
+                </form>
         </div>
       </div>
     </div>
@@ -71,4 +81,19 @@
         $('#rendered').html(text);
     }
     </script>
+    <script>
+     let _$ = s => [].slice.call(document.querySelectorAll(s));
+
+        // log events as they happen:
+        let t = _$('#tags')[0];
+        t.addEventListener('input', log);
+        t.addEventListener('change', log);
+        function log(e) {
+            $('#out')[0].textContent = `_${e.type}: ${this.value.replace(/,/g,', ')}`;
+        }
+
+        // hook 'em up:
+        _$('input[type="tags"]').forEach(tagsInput);   
+    </script>
+
 {% endblock %}

@@ -28,11 +28,15 @@
   <script src="https://code.jquery.com/jquery-3.4.1.js"></script>
   <link href="/static/css/prism.css" rel="stylesheet" />
   <script src="/static/js/prism.js"></script>
+  <link rel="stylesheet" href="/static/css/tags-input.css">
+  <script src="/static/js/tags-input.js"></script> 
 
+  <script src="sweetalert2.all.min.js"></script>
+  <!-- Optional: include a polyfill for ES6 Promises for IE11 -->
+  <script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 </head>
 
 <body>
-
   <!-- Navigation -->
 
   {% with messages = get_flashed_messages() %}
@@ -66,6 +70,11 @@
           <li class="nav-item">
               <a class="nav-link" href="{{url_for('admin.index')}}">Admin Panel</a>
           </li>
+          {% endif %}
+          <li class="nav-item">
+            <a class="nav-link" href="{{url_for('search')}}">Search</a>
+          </li>
+          {% if current_user.is_authenticated %}
           <li class="nav-item">
             <a class="nav-link" href="{{url_for('logout')}}">Logout</a>
           </li>

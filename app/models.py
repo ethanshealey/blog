@@ -24,6 +24,7 @@ class Post(UserMixin, db.Model):
     title = db.Column(db.String(64))
     subtitle = db.Column(db.String(64))
     raw_body = db.Column(db.String())
+    tags = db.Column(db.String())
     date = db.Column(db.String(64))
 
     def get_id(self):

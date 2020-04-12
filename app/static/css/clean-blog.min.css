@@ -80,6 +80,10 @@ img::-moz-selection {
   background-color: #fff;
   font-family: "Open Sans", "Helvetica Neue", Helvetica, Arial, sans-serif;
 }
+#mainNav.is-fixed .search {
+  color: #343a40 !important;
+  border-color: #343a40;
+}
 #mainNav .navbar-brand {
   font-weight: 800;
   color: #343a40;
@@ -102,6 +106,7 @@ img::-moz-selection {
     border-bottom: 1px solid transparent;
     background: 0 0;
   }
+  
   #mainNav .navbar-brand {
     padding: 10px 20px;
     color: #fff;

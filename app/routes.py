@@ -2,7 +2,7 @@ from app import app, db, login
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Post, Messages
-from app.forms import LoginForm, PostForm, ContactForm
+from app.forms import LoginForm, PostForm, ContactForm, SearchForm
 import datetime
 from flask_admin import Admin,BaseView,expose
 from flask_admin.menu import MenuLink
@@ -38,6 +38,26 @@ def index():
 def about():
     return render_template('about.html', title='About')
 
+@app.route('/search', methods=['GET', 'POST'])
+def search():
+    form=SearchForm()
+    if form.validate_on_submit():
+        return redirect(url_for('search_item', item=form.item.data))
+    return render_template('search.html', form=form, results=None, title='Search')
+
+@app.route('/search/<item>', methods=['GET', 'POST'])
+def search_item(item):
+    form=SearchForm()
+    if form.validate_on_submit():
+        return redirect(url_for('search_item', item=form.item.data))
+    Posts = Post.query.order_by(Post.post_id.desc())
+    results=[]
+    for post in Posts:
+        text = post.title + ' ' + post.subtitle + ' ' + post.raw_body + ' ' + post.tags
+        if item in text:
+            results.append(post)
+    return render_template('search.html', form=form, results=results, title='Search')
+
 @app.route('/contact', methods=['GET', 'POST'])
 def contact():
     form = ContactForm()
@@ -55,7 +75,7 @@ def create_post():
     form=PostForm()
     if form.validate_on_submit():
         count = db.session.query(Post.post_id).count()
-        post = Post(post_id=count, title=form.title.data, subtitle=form.subtitle.data, raw_body=form.raw_body.data, date=str(datetime.datetime.today().strftime("%B")) + ' ' + str(datetime.datetime.today().day) + ', ' + str(datetime.datetime.today().year))
+        post = Post(post_id=count, title=form.title.data, subtitle=form.subtitle.data, raw_body=form.raw_body.data, tags=form.tags.data, date=str(datetime.datetime.today().strftime("%B")) + ' ' + str(datetime.datetime.today().day) + ', ' + str(datetime.datetime.today().year))
         db.session.add(post)
         db.session.commit()
         flash('Posted!')
@@ -65,7 +85,8 @@ def create_post():
 @app.route('/posts/<id>/<title>')
 def view_post(id, title):
     post = Post.query.filter_by(post_id=id).first()
-    return render_template('view_post.html', post=post, title=post.title, desc=post.subtitle)
+    tags = post.tags.split(',')
+    return render_template('view_post.html', post=post, tags=tags, title=post.title, desc=post.subtitle)
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
@@ -91,3 +112,12 @@ def logout():
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html', title='404'), 404
+
+@app.context_processor  
+def inject_into_base():
+    # If user is not logged in
+    search = SearchForm()
+    if search.validate():
+        flash('wow!')
+        return redirect(url_for('index'))
+    return dict(search=search)
