@@ -112,12 +112,3 @@ def logout():
 @app.errorhandler(404)
 def page_not_found(e):
     return render_template('404.html', title='404'), 404
-
-@app.context_processor  
-def inject_into_base():
-    # If user is not logged in
-    search = SearchForm()
-    if search.validate():
-        flash('wow!')
-        return redirect(url_for('index'))
-    return dict(search=search)
