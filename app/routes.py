@@ -1,4 +1,4 @@
-from app import app, db, login
+from app import app, db, login, admin
 from flask import render_template, flash, redirect, url_for, request
 from flask_login import current_user, login_user, logout_user, login_required
 from app.models import User, Post, Messages
@@ -8,7 +8,7 @@ from flask_admin import Admin,BaseView,expose
 from flask_admin.menu import MenuLink
 from flask_admin.contrib import sqla
 
-admin = Admin(app, name='ethanshealey')
+#admin = Admin(app, name='ethanshealey')
 
 class adminView(sqla.ModelView):
     def is_accessible(self):

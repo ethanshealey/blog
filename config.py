@@ -7,3 +7,4 @@ class Config(object):
         'sqlite:///' + os.path.join(basedir, 'shealeyDB.db')
     SQLALCHEMY_TRACK_MODIFCATIONS = False
     POST_PER_PAGE = 10
+    
