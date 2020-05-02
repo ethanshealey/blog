@@ -7,6 +7,7 @@ import datetime
 from flask_admin import Admin,BaseView,expose
 from flask_admin.menu import MenuLink
 from flask_admin.contrib import sqla
+from math import ceil
 
 #admin = Admin(app, name='ethanshealey')
 
@@ -27,11 +28,9 @@ def create_admin_views():
         admin.add_views(adminView(Messages, db.session))
         views_already_created = True
 
-@app.route('/index')
 @app.route('/')
 def index():
-    Posts = Post.query.order_by(Post.post_id.desc())
-    print(Posts)
+    Posts = Post.query.order_by(Post.post_id.desc())[:3]
     return render_template('index.html', Posts=Posts, title='Home')
 
 @app.route('/about')
@@ -80,7 +79,17 @@ def create_post():
         db.session.commit()
         flash('Posted!')
         return redirect(url_for('index'))
-    return render_template('post.html', form=form, title='Make a Post')
+    return render_template('create_post.html', form=form, title='Make a Post')
+
+@app.route('/posts')
+def posts():
+    page = request.args.get('page', 1, type=int)
+    Posts = Post.query.order_by(Post.post_id.desc()).paginate(page,5,False).items
+    
+    has_prev = False if page == 1 else True
+    has_next = False if ceil(db.session.query(Post.post_id).count() / 5) == page else True
+
+    return render_template('post.html', Posts=Posts, page=page, has_next=has_next, has_prev=has_prev, title='Posts')
 
 @app.route('/posts/<id>/<title>')
 def view_post(id, title):
