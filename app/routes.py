@@ -25,6 +25,7 @@ def create_admin_views():
         admin.add_link(MenuLink(name='Public Website', category='', url=url_for('index')))
         admin.add_views(adminView(Post, db.session))
         admin.add_views(adminView(Messages, db.session))
+        admin.add_views(adminView(User, db.session))
         views_already_created = True
 
 @app.route('/')
